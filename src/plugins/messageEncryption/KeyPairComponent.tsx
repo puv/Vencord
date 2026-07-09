@@ -2,9 +2,23 @@ import { Forms, React, TextInput } from "@webpack/common";
 import { Button } from "@components/Button";
 import { CopyIcon } from "@components/Icons";
 
+import { generateKeyPair, serializePublicKey } from "./crypto";
+import { loadKeyPair, saveKeyPair } from "./settings";
+
 export function KeyPairComponent() {
     const [privateKey, setPrivateKey] = React.useState("");
     const [publicKey, setPublicKey] = React.useState("");
+    const [hasKeyPair, setHasKeyPair] = React.useState(false);
+
+    React.useEffect(() => {
+        loadKeyPair().then(kp => {
+            if (kp) {
+                setPrivateKey(kp.privateKeyJwk.d!);
+                setPublicKey(serializePublicKey(kp.publicKeyJwk));
+                setHasKeyPair(true);
+            }
+        });
+    }, []);
 
     const handleCopy = () => {
         if (!publicKey) return;
@@ -12,7 +26,13 @@ export function KeyPairComponent() {
     };
 
     const handleGenerateKeyPair = async () => {
-
+        const kp = await generateKeyPair();
+        if (kp) {
+            setPrivateKey(kp.privateKeyJwk.d!);
+            setPublicKey(serializePublicKey(kp.publicKeyJwk));
+            await saveKeyPair(kp);
+            setHasKeyPair(true);
+        }
     };
 
     return (
@@ -51,7 +71,7 @@ export function KeyPairComponent() {
                     size="medium"
                     onClick={handleGenerateKeyPair}
                 >
-                    Generate Key Pair
+                    {hasKeyPair ? "Regenerate Key Pair" : "Generate Key Pair"}
                 </Button>
             </div>
         </div>
