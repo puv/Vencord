@@ -1,0 +1,16 @@
+.vc-message-encryption .plugin-settings-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 8px 0;
+}
+
+.vc-message-encryption .plugin-settings-container > h3 {
+    margin: 0 0 8px 0;
+}
+
+.vc-message-encryption .plugin-settings-container > p {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin: 0 0 8px 0;
+}
