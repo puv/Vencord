@@ -1,16 +1,55 @@
-.vc-message-encryption .plugin-settings-container {
+.vc-message-encryption-settings {
     display: flex;
     flex-direction: column;
     gap: 16px;
     padding: 8px 0;
 }
 
-.vc-message-encryption .plugin-settings-container > h3 {
-    margin: 0 0 8px 0;
+.vc-message-encryption-keys-row {
+    display: flex;
+    gap: 8px;
 }
 
-.vc-message-encryption .plugin-settings-container > p {
-    font-size: 13px;
+.vc-message-encryption-keys-row > * {
+    flex: 1;
+}
+
+.vc-message-encryption-input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.vc-message-encryption-input-group > h5 {
+    margin: 0;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
     color: var(--text-muted);
-    margin: 0 0 8px 0;
+}
+
+.vc-message-encryption-input-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.vc-message-encryption-input-row > *:first-child {
+    flex: 1;
+}
+
+.vc-message-encryption-generate-btn {
+    cursor: pointer;
+    border: none;
+    background: var(--button-secondary-background);
+    color: var(--button-secondary-text);
+    padding: 6px 14px;
+    border-radius: 3px;
+    font-size: 13px;
+    font-weight: 500;
+    transition: background 0.15s;
+}
+
+.vc-message-encryption-generate-btn:hover {
+    background: var(--button-secondary-background-hover);
 }

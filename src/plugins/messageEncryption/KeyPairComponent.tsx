@@ -18,30 +18,32 @@ export function KeyPairComponent() {
     return (
         <div className="vc-message-encryption">
             <div className="vc-message-encryption-settings">
-                <div className="vc-message-encryption-input-group">
-                    <Forms.FormTitle tag="h5">Private Key</Forms.FormTitle>
-                    <TextInput
-                        value={privateKey}
-                        disabled
-                        placeholder="Generate a key pair first..."
-                    />
-                </div>
-
-                <div className="vc-message-encryption-input-group">
-                    <Forms.FormTitle tag="h5">Public Key</Forms.FormTitle>
-                    <div className="vc-message-encryption-input-row">
+                <div className="vc-message-encryption-keys-row">
+                    <div className="vc-message-encryption-input-group">
+                        <Forms.FormTitle tag="h5">Private Key</Forms.FormTitle>
                         <TextInput
-                            value={publicKey}
+                            value={privateKey}
                             disabled
                             placeholder="Generate a key pair first..."
                         />
-                        <Button
-                            size="iconOnly"
-                            disabled={!publicKey}
-                            onClick={handleCopy}
-                        >
-                            <CopyIcon aria-label="Copy Public Key" width={20} height={20} />
-                        </Button>
+                    </div>
+
+                    <div className="vc-message-encryption-input-group">
+                        <Forms.FormTitle tag="h5">Public Key</Forms.FormTitle>
+                        <div className="vc-message-encryption-input-row">
+                            <TextInput
+                                value={publicKey}
+                                disabled
+                                placeholder="Generate a key pair first..."
+                            />
+                            <Button
+                                size="iconOnly"
+                                disabled={!publicKey}
+                                onClick={handleCopy}
+                            >
+                                <CopyIcon aria-label="Copy Public Key" width={20} height={20} />
+                            </Button>
+                        </div>
                     </div>
                 </div>
 
