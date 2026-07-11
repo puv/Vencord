@@ -53,3 +53,9 @@
 .vc-message-encryption-generate-btn:hover {
     background: var(--button-secondary-background-hover);
 }
+
+.vc-message-encryption-btn-row {
+    display: flex;
+    gap: 8px;
+    margin-top: 16px;
+}

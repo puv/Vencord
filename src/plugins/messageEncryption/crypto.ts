@@ -38,3 +38,22 @@ export function serializePublicKey(jwk: JsonWebKey): string {
     combined.set(y, 32);
     return PUBKEY_PREFIX + btourl(combined);
 }
+
+export function deserializePublicKey(serialized: string): JsonWebKey | null {
+    if (!serialized.startsWith(PUBKEY_PREFIX)) return null;
+    const b64 = serialized.slice(PUBKEY_PREFIX.length).trim();
+    try {
+        const combined = urltob(b64);
+        if (combined.length !== 64) return null;
+        const x = combined.slice(0, 32);
+        const y = combined.slice(32, 64);
+        return {
+            kty: "EC",
+            crv: "P-256",
+            x: btourl(x),
+            y: btourl(y),
+        };
+    } catch {
+        return null;
+    }
+}

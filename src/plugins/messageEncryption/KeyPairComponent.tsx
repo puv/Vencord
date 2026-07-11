@@ -1,4 +1,4 @@
-import { Forms, React, TextInput } from "@webpack/common";
+import { Forms, React, TextInput, Toasts, showToast } from "@webpack/common";
 import { Button } from "@components/Button";
 import { CopyIcon } from "@components/Icons";
 
@@ -23,6 +23,7 @@ export function KeyPairComponent() {
     const handleCopy = () => {
         if (!publicKey) return;
         navigator.clipboard.writeText(publicKey);
+        showToast("Public key copied to clipboard.", Toasts.Type.SUCCESS);
     };
 
     const handleGenerateKeyPair = async () => {
@@ -32,6 +33,7 @@ export function KeyPairComponent() {
             setPublicKey(serializePublicKey(kp.publicKeyJwk));
             await saveKeyPair(kp);
             setHasKeyPair(true);
+            showToast("Key pair generated and saved.", Toasts.Type.SUCCESS);
         }
     };
 

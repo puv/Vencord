@@ -8,8 +8,29 @@ import "./style.css";
 
 import { Devs } from "@utils/constants";
 import definePlugin from "@utils/types";
+import type { User } from "@vencord/discord-types";
+import { Menu } from "@webpack/common";
+import { CogWheel } from "@components/Icons";
 
+import { openSetKeyModal } from "./SetKeyModal";
 import { settings } from "./settings";
+
+interface UserContextMenuProps {
+    user: User;
+}
+
+const userContextMenuPatch = (children, { user }: UserContextMenuProps) => {
+    if (!user) return;
+
+    children.push(
+        <Menu.MenuItem
+            id="vc-set-encryption-key"
+            label="Set Encryption Key"
+            icon={CogWheel}
+            action={() => openSetKeyModal(user)}
+        />,
+    );
+};
 
 export default definePlugin({
     name: "MessageEncryption",
@@ -17,6 +38,10 @@ export default definePlugin({
     tags: ["Chat", "Privacy"],
     authors: [Devs.puv],
     settings,
+
+    contextMenus: {
+        "user-context": userContextMenuPatch,
+    },
 
     start() {
         console.log("MessageEncryption started");
